@@ -4,47 +4,46 @@ import { useStateValue } from "../../../../context/stateProvider";
 import axios from "../../../axios";
 
 function PostAnswer() {
-    const [{ questionData }, dispatch] = useStateValue();
-    const [answer, setAnswer] = useState("");
-    const question_id = questionData.question_id;
-//   console.log(question_id)
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setAnswer(value);
-    };
-    const navigate = useNavigate()
-    const handleFormSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        const token = localStorage.getItem("token");
-  
-        const response = await axios.post(
-          "/api/ansewrs/answer-the-question",
-          { question_id, answer }, // Send both question_id and answer in the request body
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-  
-        console.log(response);
-  
-        if (response.status === 201) {
-            dispatch({
-                type : "POST_ANSWER_SUCCESS",
-            })
-            // navigate("/all-questions")
-          console.log("Posting answer successful");
+  const [{ questionData }, dispatch] = useStateValue();
+  const [answer, setAnswer] = useState("");
+  const question_id = questionData.question_id;
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAnswer(value);
+  };
+  const navigate = useNavigate();
 
-        } else {
-          console.error("Posting answer failed with status code:", response.status);
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.post(
+        "/api/ansewrs/answer-the-question",
+        { question_id, answer },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      } catch (error) {
-        console.error("Error on posting:", error);
+      );
+
+      console.log(response);
+
+      if (response.status === 201) {
+        dispatch({
+          type: "POST_ANSWER_SUCCESS",
+        });
+        console.log("Posting answer successful");
+        setAnswer(""); // Clear the input field
+      } else {
+        console.error("Posting answer failed with status code:", response.status);
       }
-    };
-  
+    } catch (error) {
+      console.error("Error on posting:", error);
+    }
+  };
+
   return (
     <div>
       <div className="m-auto my-10">
@@ -59,7 +58,7 @@ function PostAnswer() {
                 id="description"
                 name="description"
                 placeholder="Your Answer ..."
-                value={answer} // Corrected variable name
+                value={answer}
                 onChange={handleInputChange}
                 className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:shadow-outline h-48"
               />
@@ -79,3 +78,4 @@ function PostAnswer() {
 }
 
 export default PostAnswer;
+
