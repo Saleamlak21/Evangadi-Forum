@@ -31,6 +31,9 @@ function PostAnswer() {
         console.log(response);
   
         if (response.status === 201) {
+            dispatch({
+                type : "POST_ANSWER_SUCCESS",
+            })
             // navigate("/all-questions")
           console.log("Posting answer successful");
 

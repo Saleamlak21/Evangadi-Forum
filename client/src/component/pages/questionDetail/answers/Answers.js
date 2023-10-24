@@ -6,8 +6,7 @@ import avator from "../../../../asset/2263539.png";
 function Answers() {
   const [answers, setAnswers] = useState([]);
 //   const [updater, setUpdater] = useState(0);
-  const [{ questionData }, dispatch] = useStateValue();
-  const [count, setCount] = useState(0);
+  const [{ questionData ,postAnswerSuccess}, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = useState(true);
   //   console.log(questionData.question_id)
   useEffect(() => {
@@ -25,10 +24,8 @@ function Answers() {
           },
         });
         if (response.status === 200) {
-          setAnswers(response.data);
-         
+          setAnswers(response.data);  
           setIsLoading(false);
-          setCount(count + 1)
         } else {
           console.log("Cannot get answer!!!");
         }
@@ -37,7 +34,7 @@ function Answers() {
       }
     };
     getAnswer();
-  }, [setCount]); // i need this part update when answer change?
+  }, [postAnswerSuccess]); // i need this part update when answer change?
 //   console.log(updater);
 
   return (

@@ -1,5 +1,4 @@
 import React from "react";
-import SignUp from "./SignUp";
 import Login from "./Login";
 import bg from "../../../asset/bg-svg-f.svg"
 import { useStateValue } from "../../../context/stateProvider";
