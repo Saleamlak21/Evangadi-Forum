@@ -97,10 +97,12 @@ function Login() {
   // -------------------------------------------------------------------------
   return (
     <>
-      <div className="customH w-5/12 bg-white  px-16 py-24 items-center text-center shadow-lg shadow-gray-600 ">
+      <div className="customH w-6/12 bg-white me-6 rounded-md  px-16 py-16 items-center text-center shadow-lg shadow-gray-600 ">
         {/* ---------------------------log in ------------ */}
-        <div className={`${!onOff ? "hidden" : "block"}`}>
-          <p className=" text-base font-medium my-2">Login to your account</p>
+        <div      className={`transition-transform duration-500 transform ${
+            onOff ? "translate-x-0 block" : "translate-x-full hidden"
+          }`}>
+          <p className=" text-lg font-medium my-2">Login to your account</p>
           <span className=" text-sm font-thin my-3 flex mx-auto justify-center">
             Don't have an account?{" "}
             <p
@@ -118,7 +120,7 @@ function Login() {
               value={loginformData.email}
               placeholder="Your email"
               onChange={handleloginChange}
-              className="w-full border-2 rounded-sm my-2 h-9"
+              className="w-full rounded-sm my-2 h-12"
             />
 
             <input
@@ -128,24 +130,31 @@ function Login() {
               value={loginformData.password}
               placeholder="Your password"
               onChange={handleloginChange}
-              className="w-full  border-2 rounded-sm my-2 h-9"
+              className="w-full  border-black rounded-sm my-2 h-12"
             />
 
             <div className="w-full text-center py-2">
               {/* <Link to="/all-questions"> */}
               <button
                 type="submit"
-                className="  bg-orange-400 px-10 md:px-11 py-1"
+                className="  bg-blue-500 text-white text-lg  hover:bg-orange-400   w-full h-12 rounded-sm px-10 md:px-11 py-1"
               >
-                submit
+                Login
               </button>
               {/* </Link> */}
             </div>
-            <a>Create an account?</a>
+            <p
+              className="cursor-pointer text-black font-normal ms-1"
+              onClick={handleFormChange}
+            >
+              Create an account?
+            </p>
           </form>
         </div>
         {/* -----------sign up --------------------- */}
-        <div className={`${onOff ? "hidden" : "block"}`}>
+        <div       className={`transition-transform duration-500 transform ${
+            onOff ? "translate-x-full hidden" : "translate-x-0 block"
+          }`}>
           <p className=" text-lg font-medium my-2">Join the network</p>
           <span className=" text-sm font-thin my-3 flex mx-auto justify-center">
             Already have an account?
@@ -165,7 +174,7 @@ function Login() {
               id="firstname"
               value={formData.firstname}
               onChange={handleChange}
-              className="w-full border-2 rounded-sm my-2 h-9"
+              className="w-full border rounded-sm  h-12"
             />
 
             <div className=" flex w-full justify-between">
@@ -176,7 +185,7 @@ function Login() {
                 id="lastname"
                 value={formData.lastname}
                 onChange={handleChange}
-                className="w-full border-2 rounded-sm my-2 h-9 me-1"
+                className="w-full border rounded-sm my-2 h-12 me-1"
               />
 
               <input
@@ -186,7 +195,7 @@ function Login() {
                 id="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full border-2 rounded-sm my-2 h-9"
+                className="w-full border rounded-sm my-2 h-12"
               />
             </div>
 
@@ -197,7 +206,7 @@ function Login() {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border-2 rounded-sm my-2 h-9"
+              className="w-full border rounded-sm  h-12"
             />
 
             <input
@@ -207,16 +216,17 @@ function Login() {
               id="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full border-2 rounded-sm my-2 h-9"
+              className="w-full border rounded-sm my-2 h-12"
             />
             <br />
 
             {registrationError && (
               <p className="text-red-600 mb-4">{registrationError}</p>
             )}
+            <span className="text-sm font-thin ">I agree to the <a className=" text-orange-400">privacy policy</a> and <a className=" text-orange-400">terms of service</a>.</span>
             <button
               type="submit"
-              className="w-full border-0 rounded-md my-2 h-9 bg-blue-700 text-white"
+              className="w-full border-0 rounded-md my-2 h-12 bg-blue-700 text-white hover:bg-orange-400 active:bg-orange-500"
             >
               Agree and Join
             </button>
