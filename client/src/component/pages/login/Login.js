@@ -17,6 +17,7 @@ function Login() {
   // console.log(signUp)
 
   //-------------------this is for  login
+  const [loginError,setLoginError] = useState("")
   const [loginformData, setFormData] = useState({
     email: "",
     password: "",
@@ -48,14 +49,10 @@ function Login() {
           type: "SET_USER",
           item: { username, user_id },
         });
-
         navigate("/all-questions"); // Redirect to the desired page
-      } else {
-        // Handle login failure here, such as displaying an error message
-        console.error("Login failed");
-      }
+      } 
     } catch (error) {
-      console.log(error);
+      setLoginError(error.response.data.msg)
     }
   };
   //---------------------------------------------------------------------------------------------------------------
@@ -106,12 +103,16 @@ function Login() {
           <span className=" text-sm font-thin my-3 flex mx-auto justify-center">
             Don't have an account?{" "}
             <p
-              className="cursor-pointer text-orange-400 font-medium ms-1"
+              className="cursor-pointer text-orange-500 font-medium ms-2 hover:scale-110"
               onClick={handleFormChange}
             >
               Create a new account
             </p>
           </span>
+          {loginError && (
+              <p className="text-red-600 mb-4 text-sm bg-red-200 border-red-500 border-2 my-4 py-3 ">{loginError}</p>
+            )}
+         
           <form onSubmit={handleSubmit} className=" my-3">
             <input
               type="email"
@@ -121,6 +122,7 @@ function Login() {
               placeholder="Your email"
               onChange={handleloginChange}
               className="w-full rounded-sm my-2 h-12"
+              required
             />
 
             <input
@@ -131,6 +133,7 @@ function Login() {
               placeholder="Your password"
               onChange={handleloginChange}
               className="w-full  border-black rounded-sm my-2 h-12"
+              required
             />
 
             <div className="w-full text-center py-2">
@@ -159,7 +162,7 @@ function Login() {
           <span className=" text-sm font-thin my-3 flex mx-auto justify-center">
             Already have an account?
             <p
-              className=" cursor-pointer text-orange-400 font-medium ms-1"
+              className=" cursor-pointer text-orange-400 font-medium ms-1 hover:scale-110"
               onClick={handleFormChange}
             >
               {" "}
@@ -175,6 +178,7 @@ function Login() {
               value={formData.firstname}
               onChange={handleChange}
               className="w-full border rounded-sm  h-12"
+              required
             />
 
             <div className=" flex w-full justify-between">
@@ -186,6 +190,7 @@ function Login() {
                 value={formData.lastname}
                 onChange={handleChange}
                 className="w-full border rounded-sm my-2 h-12 me-1"
+                required
               />
 
               <input
@@ -196,6 +201,7 @@ function Login() {
                 value={formData.username}
                 onChange={handleChange}
                 className="w-full border rounded-sm my-2 h-12"
+                required
               />
             </div>
 
@@ -207,6 +213,7 @@ function Login() {
               value={formData.email}
               onChange={handleChange}
               className="w-full border rounded-sm  h-12"
+              required
             />
 
             <input
@@ -217,6 +224,7 @@ function Login() {
               value={formData.password}
               onChange={handleChange}
               className="w-full border rounded-sm my-2 h-12"
+              required
             />
             <br />
 
@@ -226,7 +234,7 @@ function Login() {
             <span className="text-sm font-thin ">I agree to the <a className=" text-orange-400">privacy policy</a> and <a className=" text-orange-400">terms of service</a>.</span>
             <button
               type="submit"
-              className="w-full border-0 rounded-md my-2 h-12 bg-blue-700 text-white hover:bg-orange-400 active:bg-orange-500"
+              className="w-full border-0 rounded-md my-2 h-12 bg-blue-700 text-white hover:bg-orange-500 active:bg-orange-500"
             >
               Agree and Join
             </button>

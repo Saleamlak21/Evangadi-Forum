@@ -56,14 +56,14 @@ async function login(req, res) {
     if (user == 0) {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ msg: "invalid credential" });
+        .json({ msg: "Either the user name or password your entered is incorrect" });
     }
 
     const isMatch = await bcrypt.compare(password, user[0].password); //compare password
     if (!isMatch) {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ msg: "invalid credential" });
+        .json({ msg: "Either the user name or password your entered is incorrect" });
     } else {
       //  -------------return jwt------------//
       const username = user[0].username;

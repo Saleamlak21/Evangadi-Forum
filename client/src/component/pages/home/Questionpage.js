@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import avator from "../../../asset/2263539.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../../context/stateProvider";
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 function Homepage() {
   const [{ username,  questionData }, dispatch] = useStateValue();
@@ -76,7 +77,7 @@ function Homepage() {
                       <p>{items.question}</p>
                     </div>
                   </div>
-                  <div className="flex items-center ">A</div>
+                  <div className="flex items-center "><ChevronRightIcon/></div>
                 </div>
               </Link>
             );

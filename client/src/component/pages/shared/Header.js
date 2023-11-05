@@ -28,8 +28,8 @@ export default function Header() {
             <p className=" text-sm font-medium mx-3 my-2">Home</p>
           </Link>
           <p className=" text-sm font-medium mx-3 my-2">How it Works</p>
-          <button className=" text-sm cursor-pointer px-10 md:px-20 mx-3 bg-blue-600 rounded text-white">
-            {user_id == null ? "SIGN IN": <div onClick={handleSignOut}>SIGN OUT</div> }
+          <button  onClick={handleSignOut} className=" text-sm cursor-pointer px-10 md:px-20 mx-3 bg-blue-600 rounded text-white">
+            {user_id == null ? "SIGN IN": "SIGN OUT" }
           </button>
         </div>
       </div>
