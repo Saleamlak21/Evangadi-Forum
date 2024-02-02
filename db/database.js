@@ -1,7 +1,8 @@
+//import mysql2
 const mysql = require("mysql2");
 require("dotenv").config(); //dotenv config
 
-//db connection
+//db connection pool
 const dbConnection = mysql.createPool({
   host: process.env.HOST,
   user: process.env.DB_USER,
@@ -35,7 +36,7 @@ const answer = `CREATE TABLE IF NOT EXISTS answer(
     FOREIGN KEY(user_id) REFERENCES users(user_id),
     FOREIGN KEY(question_id) REFERENCES question(question_id) 
 );`;
-
+//create table
 dbConnection.query(users, (err, results, fields) => {
   if (err) console.log(err);
 });
@@ -45,5 +46,5 @@ dbConnection.query(question, (err, results, fields) => {
 dbConnection.query(answer, (err, results, fields) => {
   if (err) console.log(err);
 });
-
+//export db connection
 module.exports = dbConnection.promise();

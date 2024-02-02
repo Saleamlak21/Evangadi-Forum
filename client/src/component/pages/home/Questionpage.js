@@ -1,20 +1,26 @@
+// import axios 
 import axios from "../../axios";
+// import react and other necessary modules
 import React, { useEffect, useState } from "react";
-import avator from "../../../asset/2263539.png";
+// import Link and useNavigate 
 import { Link, useNavigate } from "react-router-dom";
+// import useStateValue
 import { useStateValue } from "../../../context/stateProvider";
+// import ChevronRightIcon
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+// import avator image
+import avator from "../../../asset/2263539.png";
 
+// create a function Homepage
 function Homepage() {
-  const [{ username,  questionData }, dispatch] = useStateValue();
-  const [questions, setQuestions] = useState([]);
+  const [{ username,  questionData }, dispatch] = useStateValue(); // Destructure the username from the state
+  const [questions, setQuestions] = useState([]); // Create a state to store the questions
 
-  const navigate = useNavigate();
-  // console.log(storedUsername)
+  const navigate = useNavigate(); // Create a navigate function to navigate to another page
   useEffect(() => {
     const getAllQuestions = async () => {
       try {
-        const token = localStorage.getItem("token"); // Retrieve the token from local storage or any other source
+        const token = localStorage.getItem("token"); // Retrieve the token from local storage 
         const response = await axios({
           method: "get",
           url: "/api/questions/all-questions",
@@ -36,9 +42,7 @@ function Homepage() {
 
     getAllQuestions();
   }, []);
-
-// console.log(questions)
-
+// return the jsx
   return (
     <div>
       <div className="w-9/12 m-auto my-10">
@@ -87,5 +91,5 @@ function Homepage() {
     </div>
   );
 }
-
+// export Homepage
 export default Homepage;
